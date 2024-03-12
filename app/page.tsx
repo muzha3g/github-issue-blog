@@ -32,7 +32,7 @@ export default async function Home() {
         {issues.map((issue) => (
           <IssueCard
             key={issue.id}
-            id={issue.id}
+            number={issue.number}
             title={issue.title}
             body={issue.body}
             time={issue.created_at}
