@@ -8,9 +8,9 @@ type Props = {
 };
 
 export default async function page({ params: { id } }: Props) {
-  const owner = process.env.OWNER as string;
-  const repo = process.env.REPO as string;
-  const token = process.env.GITHUB_TOKEN as string;
+  const owner = process.env.NEXT_PUBLIC_OWNER as string;
+  const repo = process.env.NEXT_PUBLIC_REPO as string;
+  const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN as string;
 
   const octokit = new Octokit({
     auth: token,

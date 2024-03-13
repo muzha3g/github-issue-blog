@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth/next";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
-  //  email 改為自己的 gitgub 信箱
-  const email = "apple2951@gmail.com";
+  //  email 改為自己的 github 信箱
+  const email = process.env.AUTHOR_EMAIL;
   return (
     <>
       <div className="navbar bg-base-100 shadow-md">
@@ -18,7 +18,7 @@ export default async function Navbar() {
           <ul className="menu menu-horizontal px-1">
             {session?.user?.email === email ? (
               <li>
-                <Link href="/post">Post</Link>
+                <Link href="/create">Create</Link>
               </li>
             ) : (
               <></>
