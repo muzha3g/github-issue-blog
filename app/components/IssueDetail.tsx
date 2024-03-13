@@ -15,10 +15,10 @@ export default function IssueDetail({
   comment,
   number,
 }: Props) {
-  const timeSlice = time.slice(0, 10);
+  const timeSlice = time?.slice(0, 10);
   return (
     <>
-      <div className="card w-1/2 h-auto bg-base-100 shadow-xl m-2 ">
+      <div className="card w-1/2 h-auto bg-base-100 shadow-xl m-4 ">
         {" "}
         <div className="card-body">
           <h2 className="card-title h-auto overflow-clip">{title}</h2>

@@ -33,7 +33,7 @@ export default function page() {
   };
 
   return (
-    <main className="flex justify-center items-center flex-col flex-wrap my-10 text-3xl font-bold">
+    <main className="flex justify-center items-center flex-col flex-wrap my-5 text-3xl font-bold">
       <h1 className="font-mono ">Create</h1>
       <div className="mt-4 mb-2 w-3/5">
         {/* title */}

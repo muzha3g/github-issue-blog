@@ -1,35 +1,26 @@
-import { Octokit } from "octokit";
+"use client";
+
 import IssueCard from "./components/IssueCard";
 import { Issue } from "@/type";
+import { useContext, useEffect, useState } from "react";
+import GlobalContext from "./context";
 
-export default async function Home() {
-  const owner = process.env.NEXT_PUBLIC_OWNER as string;
-  const repo = process.env.NEXT_PUBLIC_REPO as string;
-  const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN as string;
+export default function Home() {
+  const { getAllIssues } = useContext(GlobalContext);
+  const [issues, setIssuse] = useState<null | Issue>(null);
 
-  const octokit = new Octokit({
-    auth: token,
-  });
-
-  const issues: Issue[] = await octokit
-    .request("GET /repos/{owner}/{repo}/issues", {
-      owner,
-      repo,
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((e) => console.log(e));
-
-  // console.log(issues);
+  useEffect(() => {
+    const get = async () => {
+      const res = await getAllIssues();
+      setIssuse(res);
+    };
+    get();
+  }, []);
 
   return (
     <>
       <main className="flex flex-col justify-center items-center py-5">
-        {issues.map((issue) => (
+        {issues?.map((issue) => (
           <IssueCard
             key={issue.id}
             number={issue.number}

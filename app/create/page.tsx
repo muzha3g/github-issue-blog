@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { options } from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth/next";
 import type { NextAuthOptions } from "next-auth";
-import Form from "../components/Form";
+import Form from "../components/CreateForm";
 
 export default async function page() {
   // 保護這個 route，非作者想從連結直接進來就會被擋

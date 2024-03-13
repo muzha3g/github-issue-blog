@@ -2,7 +2,6 @@
 
 import { createContext, ReactNode, FC } from "react";
 import { Octokit } from "octokit";
-import { Issue } from "@/type";
 
 type ContainerProps = {
   children: ReactNode;
@@ -11,11 +10,17 @@ type ContainerProps = {
 type ContextType = {
   createAnIssue: (title: string, body: string) => Promise<void>;
   getAnIssue: (id: number) => Promise<any>;
+  DeleteAnIssue: (id: number) => Promise<void>;
+  getAllIssues: () => Promise<any>;
+  EditAnIssue: (id: number, title: string, body: string) => Promise<void>;
 };
 
 const typeContextState = {
   createAnIssue: async (title: string, body: string) => {},
   getAnIssue: async (id: number) => {},
+  DeleteAnIssue: async (id: number) => {},
+  getAllIssues: async () => {},
+  EditAnIssue: async (id: number, title: string, body: string) => {},
 };
 
 export const GlobalContext = createContext<ContextType>(typeContextState);
@@ -30,7 +35,7 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
     auth: token,
   });
 
-  // 創造 issue 的 Fn
+  // Create an Issue
   const createAnIssue = async (title: string, body: string) => {
     try {
       await octokit.request("POST /repos/{owner}/{repo}/issues", {
@@ -47,7 +52,7 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
     }
   };
 
-  // 拿到單一個 issue 的 Fn
+  // Get an Issue
   const getAnIssue = async (id: number) => {
     try {
       const res = await octokit.request(
@@ -69,8 +74,66 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
     }
   };
 
+  // Delete an Issue，state 改成 close
+  const DeleteAnIssue = async (id: number) => {
+    await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
+      owner,
+      repo,
+      issue_number: id,
+      state: "closed",
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
+  };
+
+  // Get All Issue
+  const getAllIssues = async () => {
+    return await octokit
+      .request("GET /repos/{owner}/{repo}/issues", {
+        owner,
+        repo,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((e) => console.log(e));
+  };
+
+  // Edit an Issue
+  const EditAnIssue = async (id: number, title: string, body: string) => {
+    try {
+      await octokit.request(
+        "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
+        {
+          owner,
+          repo,
+          issue_number: id,
+          title,
+          body,
+          headers: {
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
+        }
+      );
+    } catch (e) {
+      console.log("EditAnIssue", e);
+    }
+  };
+
   return (
-    <GlobalContext.Provider value={{ createAnIssue, getAnIssue }}>
+    <GlobalContext.Provider
+      value={{
+        createAnIssue,
+        getAnIssue,
+        DeleteAnIssue,
+        getAllIssues,
+        EditAnIssue,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );
