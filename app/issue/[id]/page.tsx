@@ -15,11 +15,13 @@ type Props = {
 };
 
 export default function page({ params: { id } }: Props) {
-  const { getAnIssue } = useContext(GlobalContext);
-  // const issue = await getAnIssue(id);
+  const { getAnIssue, GetAllCommemts } = useContext(GlobalContext);
+
   const [issue, setIssue] = useState<null | Issue>(null);
+  const [comments, setComments] = useState(null);
+
   useEffect(() => {
-    const get = async (id: number) => {
+    const getIssue = async (id: number) => {
       try {
         const res = await getAnIssue(id);
         setIssue(res);
@@ -27,7 +29,17 @@ export default function page({ params: { id } }: Props) {
         throw e;
       }
     };
-    get(id);
+
+    const getComments = async (id: number) => {
+      try {
+        const res = await GetAllCommemts(id);
+        setComments(res.data);
+      } catch (e) {
+        throw e;
+      }
+    };
+    getIssue(id);
+    getComments(id);
   }, [id]);
 
   return (
@@ -39,6 +51,7 @@ export default function page({ params: { id } }: Props) {
         body={issue?.body}
         time={issue?.created_at}
         comment={issue?.comments}
+        comments={comments}
       />
       <div className="flex justify-center items-center gap-3 w-full flex-col sm:flex-row sm:gap-5 sm:w-1/5 my-4 mb-8">
         <EditIssueBtn id={id} />

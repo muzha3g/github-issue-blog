@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 export default function EditIssueBtn({ id }: { id: number }) {
   const router = useRouter();
-  console.log(id, "editBtn");
   return (
     <input
       type="button"

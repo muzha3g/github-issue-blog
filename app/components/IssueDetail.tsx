@@ -1,4 +1,6 @@
 import Markdown from "react-markdown";
+import CommentCard from "./CommentCard";
+import { Comment } from "@/type";
 
 type Props = {
   title: string;
@@ -6,6 +8,7 @@ type Props = {
   time: string;
   comment: number;
   number: number;
+  comments: Comment[];
 };
 
 export default function IssueDetail({
@@ -14,6 +17,7 @@ export default function IssueDetail({
   time,
   comment,
   number,
+  comments,
 }: Props) {
   const timeSlice = time?.slice(0, 10);
   return (
@@ -34,7 +38,15 @@ export default function IssueDetail({
             </p>
             <p className="flex justify-end ">{timeSlice}</p>
           </div>
-        </div>{" "}
+        </div>
+        {comments?.map((comment) => (
+          <CommentCard
+            key={comment.id}
+            image={comment?.user.avatar_url}
+            name={comment.user.login}
+            body={comment.body}
+          />
+        ))}
       </div>
     </>
   );

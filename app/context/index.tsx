@@ -13,6 +13,7 @@ type ContextType = {
   DeleteAnIssue: (id: number) => Promise<void>;
   getAllIssues: () => Promise<any>;
   EditAnIssue: (id: number, title: string, body: string) => Promise<void>;
+  GetAllCommemts: (id: number) => Promise<any>;
 };
 
 const typeContextState = {
@@ -21,6 +22,7 @@ const typeContextState = {
   DeleteAnIssue: async (id: number) => {},
   getAllIssues: async () => {},
   EditAnIssue: async (id: number, title: string, body: string) => {},
+  GetAllCommemts: async (id: number) => {},
 };
 
 export const GlobalContext = createContext<ContextType>(typeContextState);
@@ -124,6 +126,25 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
     }
   };
 
+  // Get all commemts of an issue
+  const GetAllCommemts = async (id: number) => {
+    try {
+      return await octokit.request(
+        "GET /repos/{owner}/{repo}/issues/{issue_number}/comments",
+        {
+          owner,
+          repo,
+          issue_number: id,
+          headers: {
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
+        }
+      );
+    } catch (e) {
+      console.log("GetAllIssues", e);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -132,6 +153,7 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
         DeleteAnIssue,
         getAllIssues,
         EditAnIssue,
+        GetAllCommemts,
       }}
     >
       {children}
