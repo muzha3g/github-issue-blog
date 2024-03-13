@@ -28,7 +28,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="flex flex-col justify-center items-center mt-5">
+      <main className="flex flex-col justify-center items-center py-5">
         {issues.map((issue) => (
           <IssueCard
             key={issue.id}

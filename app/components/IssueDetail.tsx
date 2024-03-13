@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Markdown from "react-markdown";
 
 type Props = {
   title: string;
@@ -21,8 +21,12 @@ export default function IssueDetail({
       <div className="card w-1/2 h-auto bg-base-100 shadow-xl m-2 ">
         {" "}
         <div className="card-body">
-          <h2 className="card-title h-6 overflow-clip">{title}</h2>
-          <p className="h-auto overflow-clip ">{body}</p>
+          <h2 className="card-title h-auto overflow-clip">{title}</h2>
+          <div className="h-auto overflow-clip ">
+            {/* 這邊有噴 error，晚點處理 */}
+            {/* 把 p tag 改成 div 就好了 :D */}
+            <Markdown>{body}</Markdown>
+          </div>
           <div className="flex justify-between items-center text-slate-600 text-xs mt-1 ">
             <p>
               <span>💬&nbsp;</span>

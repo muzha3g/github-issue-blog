@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Markdown from "react-markdown";
 
 type Props = {
   title: string;
@@ -25,9 +26,9 @@ export default function IssueCard({
             <h2 className="card-title h-6 overflow-hidden text-ellipsis whitespace-nowrap ">
               {title}
             </h2>
-            <p className="h-10 overflow-hidden text-ellipsis whitespace-nowrap mt-2  ">
-              {body}
-            </p>
+            <div className="h-11 overflow-hidden text-ellipsis whitespace-nowrap mt-2 text-wrap  ">
+              <Markdown>{body}</Markdown>
+            </div>
             <div className="flex justify-between items-center text-slate-600 text-xs ">
               <p>
                 <span>💬&nbsp;</span>
