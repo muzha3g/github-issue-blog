@@ -3,6 +3,8 @@ import BackToHomeBtn from "@/app/components/BackToHomeBtn";
 import DeleteIssueBtn from "@/app/components/DeleteIssueBtn";
 import EditIssueBtn from "@/app/components/EditIssueBtn";
 import { GetAllCommemts, getAnIssue } from "@/app/actions";
+import { Metadata } from "next";
+import { Issue } from "@/type";
 
 type Props = {
   params: {
@@ -10,12 +12,26 @@ type Props = {
   };
 };
 
+// Dynamic Metadata
+export async function generateMetadata({
+  params: { id },
+}: Props): Promise<Metadata> {
+  const userData: Promise<Issue | any> = getAnIssue(id);
+  const user: Issue = await userData;
+
+  return {
+    title: user?.title,
+    description: user?.body.slice(0, 100),
+  };
+}
+
+// 呈現動應動態 route 的一個 issue
 export default async function page({ params: { id } }: Props) {
   const issue = await getAnIssue(id);
   const comments = await GetAllCommemts(id);
 
   return (
-    <main className="flex flex-col justify-center items-center mt-20 mb-5">
+    <main className="flex flex-col justify-center items-center mt-20 mb-5 h-full mb-0 ">
       <IssueDetail
         key={issue?.id}
         title={issue?.title}

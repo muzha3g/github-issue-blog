@@ -21,12 +21,12 @@ export default function IssueCard({
 
   return (
     <>
-      <div className="card w-1/2 h-40 bg-base-100 shadow-xl m-2 ">
+      <div className="card w-1/2 h-45 bg-base-100 shadow-xl m-2">
         <Link href={`issue/${number}`}>
           {" "}
-          <div className="card-body  ">
+          <div className="card-body pb-8 ">
             <h2 className="card-title h-6 truncate line-clamp-1 ">{title}</h2>
-            <div className="h-11 mt-2 text-wrap truncate line-clamp-2">
+            <div className="h-12 mt-2 text-wrap truncate line-clamp-2 mb-2">
               <Markdown>{body}</Markdown>
             </div>
             <div className="flex justify-between items-center text-slate-600 text-xs ">
