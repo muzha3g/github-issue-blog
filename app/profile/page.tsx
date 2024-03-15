@@ -6,10 +6,9 @@ import UserCard from "../components/UserCard";
 export default async function page() {
   const session = await getServerSession(options);
 
-  console.log(session);
-
+  // 只有登入者可以進到 profile route，非登入者會被導到主頁
   if (!session) {
-    redirect("/api/auth/signin");
+    redirect("/");
   }
 
   return (

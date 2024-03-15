@@ -13,6 +13,8 @@ const nextConfig = {
       },
     ],
   },
+  // 處理使用不到 middleware，看 stack overflow 加的
+  // pageExtensions: ["ts", "tsx"],
 };
 
 export default nextConfig;

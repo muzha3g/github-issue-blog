@@ -12,8 +12,8 @@ export const options: NextAuthOptions = {
     GithubProvider({
       clientId: <string>process.env.GITHUB_ID,
       clientSecret: <string>process.env.GITHUB_SECRET,
-      // 設定 scope 是 repo ，可以抓到公開或私人的 repo(?)
-      authorization: { params: { scope: "repo" } },
+      // 設定 scope 是 repo ，可以抓到存取 repo & user 資料
+      authorization: { params: { scope: ["repo", "user"].join(" ") } },
     }),
   ],
 };
