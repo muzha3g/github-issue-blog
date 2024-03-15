@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth/next";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
-  //  email 改為自己的 github 信箱
   const email = process.env.AUTHOR_EMAIL;
   return (
     <>

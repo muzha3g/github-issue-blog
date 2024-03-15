@@ -1,30 +1,28 @@
 "use client";
 
-import { useState, useContext } from "react";
-import GlobalContext from "../context";
+import { useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { createAnIssue } from "../actions";
 
 export default function page() {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
-  const { createAnIssue } = useContext(GlobalContext);
 
   const router = useRouter();
   const submitHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      //  title & body 驗證 required 與最低字數
-
-      if (title === "") {
+      //  驗證 title & body 必填 +最低字數
+      if (title === "" || title.trim() === "") {
         Swal.fire("Title is required.");
-      } else if (body === "") {
+      } else if (body === "" || body.trim() === "") {
         Swal.fire("Description is required.");
       } else if (body.length < 30) {
         Swal.fire("Description should over 30 words.");
       } else {
         await createAnIssue(title, body);
-        Swal.fire("Success✨"); //sweet alert，出現一個 modal 跟使用者說發文成功
+        Swal.fire("Success✨"); //sweet alert，出現一個 modal alert 跟使用者說發文成功
         router.push("/"); // 使用 useRouter 進行頁面跳轉
       }
     } catch (error) {
@@ -50,6 +48,7 @@ export default function page() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
+
         {/* body */}
         <label className="form-control my-3">
           <div className="label">
@@ -64,6 +63,7 @@ export default function page() {
             onChange={(e) => setBody(e.target.value)}
           ></textarea>
         </label>
+
         {/* submit btn */}
       </div>
       <button

@@ -16,7 +16,9 @@ export default function IssueCard({
   comment,
   number,
 }: Props) {
+  // 把時間修改成只有年月日
   const timeSlice = time.slice(0, 10);
+
   return (
     <>
       <div className="card w-1/2 h-40 bg-base-100 shadow-xl m-2 ">

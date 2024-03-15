@@ -2,12 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
-import { useContext } from "react";
-import GlobalContext from "../context";
+import { DeleteAnIssue } from "../actions";
 
 export default function DeleteIssueBtn({ id }: { id: number }) {
   const router = useRouter();
-  const { DeleteAnIssue } = useContext(GlobalContext);
+
   return (
     <input
       type="button"

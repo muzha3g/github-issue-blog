@@ -4,11 +4,11 @@ import { Comment } from "@/type";
 
 type Props = {
   title: string;
+  number: number;
   body: string;
   time: string;
   comment: number;
-  number: number;
-  comments: Comment[];
+  comments?: Comment[] | undefined | null;
 };
 
 export default function IssueDetail({
@@ -16,29 +16,26 @@ export default function IssueDetail({
   body,
   time,
   comment,
-  number,
   comments,
 }: Props) {
   const timeSlice = time?.slice(0, 10);
   return (
     <>
-      <div className="card w-1/2 h-auto bg-base-100 shadow-xl m-4 ">
+      <div className="card w-1/2 h-auto bg-base-100 shadow-xl m-4 pb-6 ">
         {" "}
-        <div className="card-body">
+        <div className="card-body pb-2">
           <h2 className="card-title h-auto overflow-clip text-2xl font-bold ">
             {title}
           </h2>
           <div className="h-auto overflow-clip ">
-            {/* 這邊有噴 error，晚點處理 */}
-            {/* 把 p tag 改成 div 就好了 :D */}
             <Markdown>{body}</Markdown>
           </div>
-          <div className="flex justify-between items-center text-slate-600 mt-1">
-            <p>
+          <div className="flex justify-between items-center text-slate-600 mt-1 flex-col sm:flex-row">
+            <p className="text-sm">
               <span>💬&nbsp;</span>
               {comment}
             </p>
-            <p className="flex justify-end ">{timeSlice}</p>
+            <p className="flex justify-end text-sm ">{timeSlice}</p>
           </div>
         </div>
         {comments?.map((comment) => (

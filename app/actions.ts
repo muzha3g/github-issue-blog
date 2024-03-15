@@ -52,8 +52,73 @@ export async function getAnIssue(id: number) {
     throw e;
   }
 }
-// update an issue
 
+// create an issue
+export async function createAnIssue(title: string, body: string) {
+  try {
+    await octokit.request("POST /repos/{owner}/{repo}/issues", {
+      owner,
+      repo,
+      title,
+      body,
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
+  } catch (e) {
+    throw e;
+  }
+}
+
+// update an issue
+export async function EditAnIssue(id: number, title: string, body: string) {
+  try {
+    await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
+      owner,
+      repo,
+      issue_number: id,
+      title,
+      body,
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
+  } catch (e) {
+    console.log("EditAnIssue", e);
+  }
+}
 // delete an issue
+export async function DeleteAnIssue(id: number) {
+  try {
+    await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
+      owner,
+      repo,
+      issue_number: id,
+      state: "closed",
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
+  } catch (e) {
+    console.log("DeleteAnIssue", e);
+  }
+}
 
 // get all commemts
+export async function GetAllCommemts(id: number) {
+  try {
+    return await octokit.request(
+      "GET /repos/{owner}/{repo}/issues/{issue_number}/comments",
+      {
+        owner,
+        repo,
+        issue_number: id,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      }
+    );
+  } catch (e) {
+    console.log("GetAllIssues", e);
+  }
+}

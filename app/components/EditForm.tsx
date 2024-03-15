@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useContext, useEffect } from "react";
-import GlobalContext from "../context";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { EditAnIssue } from "../actions";
+import { getAnIssue } from "../actions";
 
 export default function EditForm({ id }: { id: string }) {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
-  const { EditAnIssue, getAnIssue } = useContext(GlobalContext);
 
   useEffect(() => {
     const get = async (id: string) => {
@@ -24,15 +24,14 @@ export default function EditForm({ id }: { id: string }) {
     e.preventDefault();
     try {
       //  title & body 驗證 required 與最低字數
-
-      if (title === "") {
+      if (title === "" || title.trim() === "") {
         Swal.fire("Title is required.");
-      } else if (body === "") {
+      } else if (body === "" || body.trim() === "") {
         Swal.fire("Description is required.");
       } else if (body.length < 30) {
         Swal.fire("Description should over 30 words.");
       } else {
-        await EditAnIssue(id, title, body);
+        await EditAnIssue(Number(id), title, body);
         Swal.fire("Success✨"); //sweet alert，出現一個 modal 跟使用者說發文成功
         router.push("/"); // 使用 useRouter 進行頁面跳轉
       }
