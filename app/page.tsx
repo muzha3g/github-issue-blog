@@ -1,25 +1,15 @@
-"use client";
-
 import IssueCard from "./components/IssueCard";
 import { Issue } from "@/type";
-import { useContext, useEffect, useState } from "react";
-import GlobalContext from "./context";
+import LoadMore from "./components/Loadmore";
+import { getAllIssues } from "./actions";
 
-export default function Home() {
-  const { getAllIssues } = useContext(GlobalContext);
-  const [issues, setIssuse] = useState<null | Issue>(null);
-
-  useEffect(() => {
-    const get = async () => {
-      const res = await getAllIssues();
-      setIssuse(res);
-    };
-    get();
-  }, []);
+export default async function Home() {
+  // 拿到第一頁 10 筆資料的 issues
+  const issues: Issue[] = await getAllIssues(1);
 
   return (
     <>
-      <main className="flex flex-col justify-center items-center py-5">
+      <main className="flex flex-col justify-center items-center py-5 mt-3 ">
         {issues?.map((issue) => (
           <IssueCard
             key={issue.id}
@@ -30,6 +20,7 @@ export default function Home() {
             comment={issue.comments}
           />
         ))}
+        <LoadMore />
       </main>
     </>
   );

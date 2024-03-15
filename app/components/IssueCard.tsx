@@ -23,10 +23,8 @@ export default function IssueCard({
         <Link href={`issue/${number}`}>
           {" "}
           <div className="card-body  ">
-            <h2 className="card-title h-6 overflow-hidden text-ellipsis whitespace-nowrap ">
-              {title}
-            </h2>
-            <div className="h-11 overflow-hidden text-ellipsis whitespace-nowrap mt-2 text-wrap  ">
+            <h2 className="card-title h-6 truncate line-clamp-1 ">{title}</h2>
+            <div className="h-11 mt-2 text-wrap truncate line-clamp-2">
               <Markdown>{body}</Markdown>
             </div>
             <div className="flex justify-between items-center text-slate-600 text-xs ">

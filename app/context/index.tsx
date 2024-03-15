@@ -11,7 +11,7 @@ type ContextType = {
   createAnIssue: (title: string, body: string) => Promise<void>;
   getAnIssue: (id: number) => Promise<any>;
   DeleteAnIssue: (id: number) => Promise<void>;
-  getAllIssues: () => Promise<any>;
+  getAllIssues: (page: number) => Promise<any>;
   EditAnIssue: (id: number, title: string, body: string) => Promise<void>;
   GetAllCommemts: (id: number) => Promise<any>;
 };
@@ -20,7 +20,7 @@ const typeContextState = {
   createAnIssue: async (title: string, body: string) => {},
   getAnIssue: async (id: number) => {},
   DeleteAnIssue: async (id: number) => {},
-  getAllIssues: async () => {},
+  getAllIssues: async (page: number) => {},
   EditAnIssue: async (id: number, title: string, body: string) => {},
   GetAllCommemts: async (id: number) => {},
 };
@@ -90,7 +90,8 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
   };
 
   // Get All Issue
-  const getAllIssues = async () => {
+  // 設定每次拿 10 筆 issues
+  const getAllIssues = async (page: number) => {
     return await octokit
       .request("GET /repos/{owner}/{repo}/issues", {
         owner,
@@ -98,6 +99,8 @@ export const GlobalProvider: FC<ContainerProps> = ({ children }) => {
         headers: {
           "X-GitHub-Api-Version": "2022-11-28",
         },
+        per_page: 10,
+        page,
       })
       .then((res) => {
         return res.data;
