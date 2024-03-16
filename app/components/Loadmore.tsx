@@ -15,7 +15,7 @@ function LoadMore() {
   const [data, setData] = useState<Issue[]>([]);
 
   // 設定若資料抓完後，就不要繼續呈現 Loading element 了
-  const [totalIssues, setTotalIssues] = useState<number>(1);
+  const [totalIssues, setTotalIssues] = useState<number>(0);
 
   // 滑到底部時，inView 為 true，就回執行 callbackFn，重新抓資料並渲染
   useEffect(() => {
@@ -26,12 +26,15 @@ function LoadMore() {
         page++;
       });
     }
+    return () => {
+      setTotalIssues(0);
+    };
   }, [inView]);
 
   return (
     <>
       <section className="flex flex-col justify-center items-center py-0 mt-0">
-        {data.map((issue) => (
+        {data?.map((issue) => (
           <IssueCard
             key={issue.id}
             number={issue.number}

@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth/next";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
-  const email = process.env.AUTHOR_EMAIL;
+  const email = process.env.GITHUB_AUTHOR_EMAIL;
   return (
     <>
       <div className="navbar bg-base-100 shadow-md">

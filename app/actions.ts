@@ -1,12 +1,11 @@
 // 打 api 相關的 function 都放這邊
 
-import { Issue } from "@/type";
 import { Octokit } from "octokit";
 
 // 打 github api 的共用資訊
-const owner = process.env.NEXT_PUBLIC_OWNER as string;
-const repo = process.env.NEXT_PUBLIC_REPO as string;
-const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN as string;
+const owner = process.env.GITHUB_OWNER as string;
+const repo = process.env.GITHUB_REPO as string;
+const token = process.env.GITHUB_TOKEN as string;
 
 // 使用 github document 的方式打 api，token 要自己去 developer setting generate 一個
 const octokit = new Octokit({
@@ -66,6 +65,7 @@ export async function createAnIssue(title: string, body: string) {
       },
     });
   } catch (e) {
+    console.log("createAnIssue", e);
     throw e;
   }
 }
@@ -85,6 +85,7 @@ export async function EditAnIssue(id: number, title: string, body: string) {
     });
   } catch (e) {
     console.log("EditAnIssue", e);
+    throw e;
   }
 }
 // delete an issue
@@ -101,6 +102,7 @@ export async function DeleteAnIssue(id: number) {
     });
   } catch (e) {
     console.log("DeleteAnIssue", e);
+    throw e;
   }
 }
 
@@ -120,5 +122,6 @@ export async function GetAllCommemts(id: number) {
     );
   } catch (e) {
     console.log("GetAllIssues", e);
+    throw e;
   }
 }

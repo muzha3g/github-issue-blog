@@ -34,7 +34,7 @@ export default async function page({ params: { id } }: Props) {
 
   // 設定編輯跟刪除會顯示的情境，非作者看不到這兩個按鈕
   const session = await getServerSession(options);
-  const email = process.env.AUTHOR_EMAIL;
+  const email = process.env.GITHUB_AUTHOR_EMAIL;
 
   return (
     <main className="flex flex-col justify-center items-center mt-20  h-full mb-0 ">
