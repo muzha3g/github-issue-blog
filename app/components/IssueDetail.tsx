@@ -4,11 +4,10 @@ import { Comment } from "@/type";
 
 type Props = {
   title: string;
-  number: number;
-  body: string;
+  body: string | undefined | null;
   time: string;
   comment: number;
-  comments?: Comment[] | undefined | null;
+  comments?: Comment[] | undefined | null | any[];
 };
 
 export default function IssueDetail({
@@ -22,7 +21,6 @@ export default function IssueDetail({
   return (
     <>
       <div className="card w-1/2 h-auto bg-base-100 shadow-xl m-4 pb-6 ">
-        {" "}
         <div className="card-body pb-2">
           <h2 className="card-title h-auto overflow-clip text-2xl font-bold ">
             {title}

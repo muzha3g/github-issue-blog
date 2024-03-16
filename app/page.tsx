@@ -10,16 +10,21 @@ export default async function Home() {
   return (
     <>
       <main className="flex flex-col justify-center items-center py-5 mt-3 ">
-        {issues?.map((issue) => (
-          <IssueCard
-            key={issue.id}
-            number={issue.number}
-            title={issue.title}
-            body={issue.body}
-            time={issue.created_at}
-            comment={issue.comments}
-          />
-        ))}
+        {issues ? (
+          issues?.map((issue) => (
+            <IssueCard
+              key={issue.id}
+              number={issue.number}
+              title={issue.title}
+              body={issue.body}
+              time={issue.created_at}
+              comment={issue.comments}
+            />
+          ))
+        ) : (
+          <>No issues 😵</>
+        )}
+
         <LoadMore />
       </main>
     </>

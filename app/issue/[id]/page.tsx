@@ -7,7 +7,6 @@ import { Metadata } from "next";
 import { Issue } from "@/type";
 import { getServerSession } from "next-auth";
 import { options } from "../../api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
 
 type Props = {
   params: {
@@ -38,7 +37,7 @@ export default async function page({ params: { id } }: Props) {
   const email = process.env.AUTHOR_EMAIL;
 
   return (
-    <main className="flex flex-col justify-center items-center mt-20 mb-5 h-full mb-0 ">
+    <main className="flex flex-col justify-center items-center mt-20  h-full mb-0 ">
       <IssueDetail
         key={issue?.id}
         title={issue?.title}
