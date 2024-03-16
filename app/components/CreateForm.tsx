@@ -5,11 +5,12 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { createAnIssue } from "../actions";
 
-export default function page() {
+export default function Page() {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
 
   const router = useRouter();
+
   const submitHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { options } from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth/next";
+import Image from "next/image";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
@@ -43,7 +44,10 @@ export default async function Navbar() {
           >
             <div className="w-10 rounded-full">
               <Link href="/profile">
-                <img alt="profile image" src={session?.user?.image as string} />
+                <Image
+                  alt="profile image"
+                  src={session?.user?.image as string}
+                />
               </Link>
             </div>
           </div>

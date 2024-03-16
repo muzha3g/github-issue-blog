@@ -4,7 +4,7 @@ import { Comment } from "@/type";
 
 type Props = {
   title: string;
-  body: string | undefined | null;
+  body: string;
   time: string;
   comment: number;
   comments?: Comment[] | undefined | null | any[];

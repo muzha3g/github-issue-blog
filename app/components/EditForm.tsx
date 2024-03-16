@@ -14,7 +14,7 @@ export default function EditForm({ id }: { id: string }) {
     const get = async (id: string) => {
       const res = await getAnIssue(Number(id));
       setTitle(res.title);
-      setBody(res.body);
+      setBody(res.body ?? ""); //只寫 res.body 會說 type 不符
     };
     get(id);
   }, []);
