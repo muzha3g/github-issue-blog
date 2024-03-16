@@ -41,7 +41,7 @@ export default async function page({ params: { id } }: Props) {
       <IssueDetail
         key={issue?.id}
         title={issue?.title}
-        body={issue?.body}
+        body={issue?.body ?? ""}
         time={issue?.created_at}
         comment={issue?.comments}
         comments={comments?.data}
