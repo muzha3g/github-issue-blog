@@ -7,7 +7,10 @@ import type { NextAuthOptions } from "next-auth";
 
 // 開始設定 options，這邊語法可參考 nextauth 的文件 & Dave gray & FCC video (這個還有設定 callback 跟一個 profile(profile))
 export const options: NextAuthOptions = {
-  // 設定要用的第三放 provider，會是一個 array
+  // 處理 next-auth JWEDecryptionFailed
+  // secret: process.env.NEXTAUTH_SECRET,
+
+  // 設定要用的第三方 provider，會是一個 array
   providers: [
     GithubProvider({
       clientId: <string>process.env.GITHUB_ID,
