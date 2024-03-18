@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Props = {
   title: string;
@@ -25,9 +26,13 @@ export default function IssueCard({
         <Link href={`issue/${number}`}>
           {" "}
           <div className="card-body pb-8 ">
-            <h2 className="card-title h-6 truncate line-clamp-1 ">{title}</h2>
+            <h2 className="card-title h-6 truncate line-clamp-1 text-wrap">
+              {title}
+            </h2>
             <div className="h-12 mt-2 text-wrap truncate line-clamp-2 mb-2">
-              <Markdown>{body}</Markdown>
+              <Markdown remarkPlugins={[remarkGfm]} className="prose">
+                {body}
+              </Markdown>
             </div>
             <div className="flex justify-between items-center text-slate-600 text-xs ">
               <p>

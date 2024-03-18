@@ -1,6 +1,7 @@
 import Markdown from "react-markdown";
 import CommentCard from "./CommentCard";
 import { Comment } from "@/type";
+import remarkGfm from "remark-gfm";
 
 type Props = {
   title: string;
@@ -26,7 +27,11 @@ export default function IssueDetail({
             {title}
           </h2>
           <div className="h-auto overflow-clip ">
-            <Markdown>{body}</Markdown>
+            {/* 加上 remarkPlugins={[remarkGfm]} 讓 strikethrough, tables, tasklists and URLs 可以顯示出來 */}
+            {/* className 加上 prose 是為了能正確顯示出大小標 */}
+            <Markdown remarkPlugins={[remarkGfm]} className="prose">
+              {body}
+            </Markdown>
           </div>
           <div className="flex justify-between items-center text-slate-600 mt-1 flex-col sm:flex-row">
             <p className="text-sm">

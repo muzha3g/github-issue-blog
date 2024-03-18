@@ -3,9 +3,9 @@
 import { Octokit } from "octokit";
 
 // 打 github api 的共用資訊
-const owner = process.env.GITHUB_OWNER as string;
-const repo = process.env.GITHUB_REPO as string;
-const token = process.env.GITHUB_TOKEN as string;
+const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER as string;
+const repo = process.env.NEXT_PUBLIC_GITHUB_REPO as string;
+const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN as string;
 
 // 使用 github document 的方式打 api，token 要自己去 developer setting generate 一個
 const octokit = new Octokit({

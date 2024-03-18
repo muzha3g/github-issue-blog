@@ -15,6 +15,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  // 加上 require('@tailwindcss/typography') 處理無法顯示大標小標加的
+  plugins: [require("daisyui"), require("@tailwindcss/typography")],
 };
 export default config;

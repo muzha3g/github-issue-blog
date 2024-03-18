@@ -47,6 +47,10 @@ export default async function Navbar() {
                 <Image
                   alt="profile image"
                   src={session?.user?.image as string}
+                  width={100}
+                  height={100}
+                  className="rounded-lg"
+                  priority={true}
                 />
               </Link>
             </div>
