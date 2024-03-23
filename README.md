@@ -85,7 +85,7 @@
 - `action.tsx`：放置所有對 issue CRUD、對 comment 進行 read 的 api call function。
 - `api folder`：放置關於 oauth 的操作（使用 NextAuth 來做身份驗證 + 授權）。
 - `components folder`：放置不同頁面會用到的元件，除了 `LoadMore.tsx` 外，每個元件都是 server components，只有需要用到 useEffect + useState hook 的 `LoadMore.tsx` 是 client component。
-- `create & profile folder`：創建新 issue 時會跳轉過去的 route & 登入後的個人頁面 route
+- `create & profile folder`：創建新 issue 時會跳轉過去的 route & 登入後的個人頁面 route。
 - `edit & issue folder`：動態的 route，若有多個 issue 時，就會跳轉該 issue id 的 route 去。
 
 ## 啟動專案
@@ -97,12 +97,14 @@
 3. 創建 github OAuth app。github 首頁 navbar 最右邊的圓形個人圖片點下去>>setting>>Developer Settings>>OAuth Apps>>New Auth App，HomePage URL 跟 Authorization callback URL 分別填入：`https://localhost:3000`、`https://localhost:3000/api/auth/callback/github`。
 
 4. 回到 VSCode，將 `.env.local.example` 改名為 `.env.local`，按照上述檔案中每一行變數前面的註記說明，將以下變數填入相對應的資訊：
-   `NEXT_PUBLIC_GITHUB_OWNER=
+```
+NEXT_PUBLIC_GITHUB_OWNER=
 NEXT_PUBLIC_GITHUB_REPO=
 NEXT_PUBLIC_GITHUB_TOKEN=
 GITHUB_AUTHOR_EMAIL=
 GITHUB_ID=
 GITHUB_SECRET=
-NEXTAUTH_SECRET=`
+NEXTAUTH_SECRET=
+```
 
 5. 一切就緒後，在 VSCode 下指令 `npm run dev`，就能在本地端跑起來專案了 ^o^
