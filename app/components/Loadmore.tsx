@@ -13,22 +13,22 @@ let page = 2;
 function LoadMore() {
   const { ref, inView } = useInView();
   const [data, setData] = useState<Issue[]>([]);
-
+  const [loading, setLoading] = useState<boolean>(false);
   // 設定若資料抓完後，就不要繼續呈現 Loading element 了
-  const [totalIssues, setTotalIssues] = useState<number>(0);
+  const [totalIssues, setTotalIssues] = useState<number>(1);
 
   // 滑到底部時，inView 為 true，就回執行 callbackFn，重新抓資料並渲染
   useEffect(() => {
-    if (inView) {
+    // 如果上一次除新渲染時，已經沒有資料了，滑到底後就不要再執行以下 uesEffect
+    if (inView && totalIssues) {
       getAllIssues(page).then((res) => {
+        setLoading(true);
         setData([...data, ...res]);
+        setLoading(false);
         setTotalIssues(res.length);
         page++;
       });
     }
-    return () => {
-      setTotalIssues(0);
-    };
   }, [inView]);
 
   return (
@@ -48,7 +48,7 @@ function LoadMore() {
         {/* 把 ref 設定在 loading element，當視窗滑到這個 elememt 時，inView 就會為 true */}
         <div ref={ref}>
           {/* 還能抓到資料就顯示 loading，沒資料了就顯示空白 */}
-          {totalIssues > 0 ? (
+          {totalIssues > 0 && loading === true ? (
             <>
               {" "}
               <span className="loading loading-spinner loading-md"></span>
