@@ -82,11 +82,11 @@
         page.tsx
 ```
 
-- action.tsx：放置所有對 issue CRUD、對 comment 進行 read 的 api call function。
-- api folder：放置關於 oauth 的操作（使用 NextAuth 來做身份驗證 + 授權）。
-- components folder：放置不同頁面會用到的元件，除了 `LoadMore.tsx` 外，每個元件都是 server components，只有需要用到 useEffect + useState hook 的 `LoadMore.tsx` 是 client component。
-- create & profile folder：創建新 issue 時會跳轉過去的 route & 登入後的個人頁面 route
-- edit & issue folder：動態的 route，若有多個 issue 時，就會跳轉該 issue id 的 route 去。
+- `action.tsx`：放置所有對 issue CRUD、對 comment 進行 read 的 api call function。
+- `api folder`：放置關於 oauth 的操作（使用 NextAuth 來做身份驗證 + 授權）。
+- `components folder`：放置不同頁面會用到的元件，除了 `LoadMore.tsx` 外，每個元件都是 server components，只有需要用到 useEffect + useState hook 的 `LoadMore.tsx` 是 client component。
+- `create & profile folder`：創建新 issue 時會跳轉過去的 route & 登入後的個人頁面 route
+- `edit & issue folder`：動態的 route，若有多個 issue 時，就會跳轉該 issue id 的 route 去。
 
 ## 啟動專案
 
