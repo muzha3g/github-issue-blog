@@ -33,7 +33,7 @@ function LoadMore() {
 
   return (
     <>
-      <section className="flex flex-col justify-center items-center w-full">
+      <section className="flex flex-col justify-center items-center w-full h-full">
         {data?.map((issue) => (
           <IssueCard
             key={issue.id}
@@ -48,7 +48,7 @@ function LoadMore() {
         {/* 把 ref 設定在 loading element，當視窗滑到這個 elememt 時，inView 就會為 true */}
         <div ref={ref}>
           {/* 還能抓到資料就顯示 loading，沒資料了就顯示空白 */}
-          {totalIssues > 0 && loading === true ? (
+          {totalIssues > 0 && loading ? (
             <>
               {" "}
               <span className="loading loading-spinner loading-md"></span>
