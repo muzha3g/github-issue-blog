@@ -31,27 +31,29 @@
 
 ## 加分條件
 
-✅ 使用 TypeScript
-✅ 使用 Next.js + App Router
-✅ 有處理錯誤及例外狀況 (Error Handling)
-✅ 有部署至線上環境
-❌ 調校 Web Vitals 評分 （嘗試中）
+✅ 使用 TypeScript  
+✅ 使用 Next.js + App Router  
+✅ 有處理錯誤及例外狀況 (Error Handling)  
+✅ 有部署至線上環境  
+❌ 調校 Web Vitals 評分 （嘗試中，目前效能如下）
+![Alt text](image.png)
 
 ## 專案架構設計
 
-`|   actions.ts
+```
+|   actions.ts
 |   favicon.ico
 |   globals.css
 |   layout.tsx
 |   loading.tsx
 |   page.tsx
-|   
+|
 +---api
 |   \---auth
 |       \---[...nextauth]
-|               options.ts 
+|               options.ts
 |               route.ts
-|               
+|
 +---components
 |       BackToHomeBtn.tsx
 |       CommentCard.tsx
@@ -64,20 +66,21 @@
 |       Loadmore.tsx
 |       Navbar.tsx
 |       UserCard.tsx
-|       
+|
 +---create
 |       page.tsx
-|       
+|
 +---edit
 |   \---[id]
 |           page.tsx
-|           
+|
 +---issue
 |   \---[id]
 |           page.tsx
-|           
+|
 \---profile
-        page.tsx`
+        page.tsx
+```
 
 - action.tsx：放置所有對 issue CRUD、對 comment 進行 read 的 api call function。
 - api folder：放置關於 oauth 的操作（使用 NextAuth 來做身份驗證 + 授權）。

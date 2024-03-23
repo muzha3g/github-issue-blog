@@ -26,10 +26,10 @@ export default function IssueCard({
         <Link href={`issue/${number}`}>
           {" "}
           <div className="card-body pb-8 ">
-            <h2 className="card-title h-6 truncate line-clamp-1 text-wrap">
+            <h2 className="card-title h-7 truncate line-clamp-1 text-wrap">
               {title}
             </h2>
-            <div className="h-12 mt-2 text-wrap truncate line-clamp-2 mb-2">
+            <div className="h-12 mt-1 text-wrap truncate line-clamp-2 mb-2">
               <Markdown remarkPlugins={[remarkGfm]} className="prose">
                 {body}
               </Markdown>
