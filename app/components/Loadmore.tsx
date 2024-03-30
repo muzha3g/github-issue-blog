@@ -21,13 +21,17 @@ function LoadMore() {
   useEffect(() => {
     // 如果上一次除新渲染時，已經沒有資料了，滑到底後就不要再執行以下 uesEffect
     if (inView && totalIssues) {
-      getAllIssues(page).then((res) => {
-        setLoading(true);
-        setData([...data, ...res]);
-        setLoading(false);
-        setTotalIssues(res.length);
-        page++;
-      });
+      try {
+        getAllIssues(page).then((res) => {
+          setLoading(true);
+          setData([...data, ...res]);
+          setLoading(false);
+          setTotalIssues(res.length);
+          page++;
+        });
+      } catch (e) {
+        setTotalIssues(0);
+      }
     }
   }, [inView]);
 
@@ -50,7 +54,6 @@ function LoadMore() {
           {/* 還能抓到資料就顯示 loading，沒資料了就顯示空白 */}
           {totalIssues > 0 && loading ? (
             <>
-              {" "}
               <span className="loading loading-spinner loading-md"></span>
             </>
           ) : (

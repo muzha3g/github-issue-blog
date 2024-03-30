@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Props = {
   name: string;
@@ -17,7 +19,9 @@ export default function CommentCard({ name, image, body }: Props) {
         </div>
         <div className="chat-header text-xs px-2">{name}</div>
         <div className="chat-bubble text-sm bg-gray-200 text-black py-3">
-          {body}
+          <Markdown remarkPlugins={[remarkGfm]} className="prose">
+            {body}
+          </Markdown>
         </div>
       </div>
     </>
